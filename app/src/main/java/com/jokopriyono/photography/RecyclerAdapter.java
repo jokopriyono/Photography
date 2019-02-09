@@ -7,11 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    private DataDummy dataDummy;
+import com.jokopriyono.photography.api.PhotoItem;
 
-    RecyclerAdapter(DataDummy dataDummy) {
-        this.dataDummy = dataDummy;
+import java.util.List;
+
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+    private List<PhotoItem> photoItemList;
+
+    RecyclerAdapter(List<PhotoItem> data) {
+        this.photoItemList = data;
     }
 
     @NonNull
@@ -22,12 +26,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
-        holder.txtName.setText(dataDummy.getListDataDummy().get(position));
+        holder.txtName.setText(photoItemList.get(position).getAuthor());
     }
 
     @Override
     public int getItemCount() {
-        return dataDummy.getListDataDummy().size();
+        return photoItemList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
