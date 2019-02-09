@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jokopriyono.photography.api.PhotoItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -27,6 +29,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
         holder.txtName.setText(photoItemList.get(position).getAuthor());
+        holder.txtType.setText(photoItemList.get(position).getFormat());
+        holder.txtUrl.setText(photoItemList.get(position).getPost_url());
+
+        String url = "https://picsum.photos/200?image=" + photoItemList.get(position).getId();
+        Picasso.get().load(url).into(holder.imgPhoto);
     }
 
     @Override
@@ -35,11 +42,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName;
+        TextView txtName, txtType, txtUrl;
+        ImageView imgPhoto;
 
         ViewHolder(@NonNull View v) {
             super(v);
             txtName = v.findViewById(R.id.txt_name);
+            txtType = v.findViewById(R.id.txt_type);
+            txtUrl = v.findViewById(R.id.txt_url);
+            imgPhoto = v.findViewById(R.id.img_photo);
         }
     }
 }
