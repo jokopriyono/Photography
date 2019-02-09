@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Pho
     private static final String baseUrl = "https://picsum.photos/";
     private RelativeLayout relativeLoading;
     private RecyclerView recycler;
+    private RecyclerAdapter.OnPhotoClickListener photoClickListener = new RecyclerAdapter.OnPhotoClickListener() {
+        @Override
+        public void OnClick(int id) {
+            Toast.makeText(MainActivity.this, "" + id, Toast.LENGTH_SHORT).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Pho
     }
 
     private void showDataRecycler(List<PhotoItem> data) {
-        RecyclerAdapter adapter = new RecyclerAdapter(data);
+        RecyclerAdapter adapter = new RecyclerAdapter(data, photoClickListener);
         recycler.setAdapter(adapter);
     }
 

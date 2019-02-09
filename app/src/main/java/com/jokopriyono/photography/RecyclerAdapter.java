@@ -1,6 +1,7 @@
 package com.jokopriyono.photography;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,15 @@ import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private List<PhotoItem> photoItemList;
+    private OnPhotoClickListener listener;
 
-    RecyclerAdapter(List<PhotoItem> data) {
+    RecyclerAdapter(List<PhotoItem> data, OnPhotoClickListener listener) {
         this.photoItemList = data;
+        this.listener = listener;
+    }
+
+    public interface OnPhotoClickListener{
+        void OnClick(int id);
     }
 
     @NonNull
@@ -28,6 +35,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
+        holder.bind(listener);
+
         holder.txtName.setText(photoItemList.get(position).getAuthor());
         holder.txtType.setText(photoItemList.get(position).getFormat());
         holder.txtUrl.setText(photoItemList.get(position).getPost_url());
@@ -44,6 +53,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtType, txtUrl;
         ImageView imgPhoto;
+        CardView cardView;
 
         ViewHolder(@NonNull View v) {
             super(v);
@@ -51,6 +61,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             txtType = v.findViewById(R.id.txt_type);
             txtUrl = v.findViewById(R.id.txt_url);
             imgPhoto = v.findViewById(R.id.img_photo);
+            cardView = v.findViewById(R.id.cardview);
+        }
+
+        void bind(final OnPhotoClickListener listener) {
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.OnClick(photoItemList.get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 }
