@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jokopriyono.photography.api.PhotoItem;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -36,5 +37,8 @@ public class DetailActivity extends AppCompatActivity {
     private void showDataPhoto(PhotoItem data) {
         txtAuthor.setText(data.getAuthor());
         txtFileName.setText(data.getFilename());
+
+        String url = "https://picsum.photos/200?image=" + data.getId();
+        Picasso.get().load(url).into(imgPhoto);
     }
 }
