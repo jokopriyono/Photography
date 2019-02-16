@@ -1,5 +1,6 @@
 package com.jokopriyono.photography;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -28,8 +29,10 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Pho
     private RecyclerView recycler;
     private RecyclerAdapter.OnPhotoClickListener photoClickListener = new RecyclerAdapter.OnPhotoClickListener() {
         @Override
-        public void OnClick(int id) {
-            Toast.makeText(MainActivity.this, "" + id, Toast.LENGTH_SHORT).show();
+        public void OnClick(PhotoItem photo) {
+            Intent i = new Intent(MainActivity.this, DetailActivity.class);
+            i.putExtra("data", photo);
+            startActivity(i);
         }
     };
 

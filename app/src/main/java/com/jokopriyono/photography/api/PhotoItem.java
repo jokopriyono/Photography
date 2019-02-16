@@ -1,6 +1,8 @@
 package com.jokopriyono.photography.api;
 
-public class PhotoItem {
+import java.io.Serializable;
+
+public class PhotoItem implements Serializable {
     private String format;
     private int width;
     private int height;

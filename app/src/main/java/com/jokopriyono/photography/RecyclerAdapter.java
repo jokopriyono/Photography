@@ -24,7 +24,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public interface OnPhotoClickListener{
-        void OnClick(int id);
+        void OnClick(PhotoItem photo);
     }
 
     @NonNull
@@ -68,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.OnClick(photoItemList.get(getAdapterPosition()).getId());
+                    listener.OnClick(photoItemList.get(getAdapterPosition()));
                 }
             });
         }
